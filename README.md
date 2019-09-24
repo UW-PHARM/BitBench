@@ -45,9 +45,7 @@ lazy val iterative_svd = (project in file("IterativeSVD"))
   .settings(
     commonSettings,
     name := "iterative_svd",
-    // libraryDependencies += "com.github.uw-pharm" % "bitsad-plugin_2.12" % "0.5.0",
-    // libraryDependencies += compilerPlugin("com.github.uw-pharm" % "bitsad-plugin_2.12" % "0.5.0"),
-    // scalacOptions += s"-Xplugin:bitsad-plugin_2.12.jar:bitsad-libraries_2.12.jar",
+    // hardwareSettings,
     // scalacOptions += s"-P:bitsad-plugin:top:IterativeSVD.scala"
   )
 ```
