@@ -1,6 +1,7 @@
 autoCompilerPlugins := true
 cancelable in Global := true
 
+ThisBuild / useSuperShell := false
 ThisBuild / organization := "com.github.uw-pharm"
 ThisBuild / scalaVersion := "2.12.6"
 
@@ -12,7 +13,13 @@ ThisBuild / scalaVersion := "2.12.6"
 lazy val commonSettings = Seq(
   libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.5" % Test,
   libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value,
-  libraryDependencies += "com.github.uw-pharm" % "bitsad-libraries_2.12" % "0.5.0",
+  libraryDependencies += "com.github.uw-pharm" % "bitsad-libraries_2.12" % "0.5.2"
+)
+
+lazy val hardwareSettings = Seq(
+  libraryDependencies += "com.github.uw-pharm" % "bitsad-plugin_2.12" % "0.5.2",
+  libraryDependencies += compilerPlugin("com.github.uw-pharm" % "bitsad-plugin_2.12" % "0.5.2"),
+  scalacOptions += s"-Xplugin:bitsad-plugin_2.12.jar:bitsad-libraries_2.12.jar"
 )
 
 lazy val root = (project in file("."))
@@ -28,9 +35,7 @@ lazy val iterative_svd = (project in file("IterativeSVD"))
   .settings(
     commonSettings,
     name := "iterative_svd",
-    libraryDependencies += "com.github.uw-pharm" % "bitsad-plugin_2.12" % "0.5.0",
-    libraryDependencies += compilerPlugin("com.github.uw-pharm" % "bitsad-plugin_2.12" % "0.5.0"),
-    scalacOptions += s"-Xplugin:bitsad-plugin_2.12.jar:bitsad-libraries_2.12.jar",
+    hardwareSettings,
     scalacOptions += s"-P:bitsad-plugin:top:IterativeSVD.scala"
   )
   // .settings(
@@ -46,9 +51,7 @@ lazy val linear_solver = (project in file("LinearSolver"))
   .settings(
     commonSettings,
     name := "linear_solver",
-    libraryDependencies += "com.github.uw-pharm" % "bitsad-plugin_2.12" % "0.5.0",
-    libraryDependencies += compilerPlugin("com.github.uw-pharm" % "bitsad-plugin_2.12" % "0.5.0"),
-    scalacOptions += s"-Xplugin:bitsad-plugin_2.12.jar:bitsad-libraries_2.12.jar",
+    hardwareSettings,
     scalacOptions += s"-P:bitsad-plugin:top:LinearSolver.scala"
   )
 
@@ -56,9 +59,7 @@ lazy val svf_filter = (project in file("SVFFilter"))
   .settings(
     commonSettings,
     name := "svf_filter",
-    libraryDependencies += "com.github.uw-pharm" % "bitsad-plugin_2.12" % "0.5.0",
-    libraryDependencies += compilerPlugin("com.github.uw-pharm" % "bitsad-plugin_2.12" % "0.5.0"),
-    scalacOptions += s"-Xplugin:bitsad-plugin_2.12.jar:bitsad-libraries_2.12.jar",
+    hardwareSettings,
     scalacOptions += s"-P:bitsad-plugin:top:PDMBandpassFilterSVF.scala"
   )
 
@@ -66,9 +67,7 @@ lazy val bq_filter = (project in file("BQFilter"))
   .settings(
     commonSettings,
     name := "bq_filter",
-    libraryDependencies += "com.github.uw-pharm" % "bitsad-plugin_2.12" % "0.5.0",
-    libraryDependencies += compilerPlugin("com.github.uw-pharm" % "bitsad-plugin_2.12" % "0.5.0"),
-    scalacOptions += s"-Xplugin:bitsad-plugin_2.12.jar:bitsad-libraries_2.12.jar",
+    hardwareSettings,
     scalacOptions += s"-P:bitsad-plugin:top:PDMBandpassFilterBQ.scala"
   )
 
@@ -76,9 +75,7 @@ lazy val ma4_filter = (project in file("MA4Filter"))
   .settings(
     commonSettings,
     name := "ma4_filter",
-    libraryDependencies += "com.github.uw-pharm" % "bitsad-plugin_2.12" % "0.5.0",
-    libraryDependencies += compilerPlugin("com.github.uw-pharm" % "bitsad-plugin_2.12" % "0.5.0"),
-    scalacOptions += s"-Xplugin:bitsad-plugin_2.12.jar:bitsad-libraries_2.12.jar",
+    hardwareSettings,
     scalacOptions += s"-P:bitsad-plugin:top:PDMMovingAverageFilter4.scala"
   )
 
@@ -86,8 +83,6 @@ lazy val ma32_filter = (project in file("MA32Filter"))
   .settings(
     commonSettings,
     name := "ma32_filter",
-    libraryDependencies += "com.github.uw-pharm" % "bitsad-plugin_2.12" % "0.5.0",
-    libraryDependencies += compilerPlugin("com.github.uw-pharm" % "bitsad-plugin_2.12" % "0.5.0"),
-    scalacOptions += s"-Xplugin:bitsad-plugin_2.12.jar:bitsad-libraries_2.12.jar",
+    hardwareSettings,
     scalacOptions += s"-P:bitsad-plugin:top:PDMMovingAverageFilter32.scala"
   )
